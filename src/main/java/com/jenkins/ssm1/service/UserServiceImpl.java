@@ -1,5 +1,10 @@
 package com.jenkins.ssm1.service;
 
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -8,22 +13,17 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jenkins.ssm1.dao.UserRepository;
+import com.jenkins.ssm1.dao.UserDao;
 import com.jenkins.ssm1.domain.Operation;
 import com.jenkins.ssm1.domain.Permission;
 import com.jenkins.ssm1.domain.Role;
 import com.jenkins.ssm1.domain.User;
 
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements IUserService {
 
 	@Autowired
-	UserRepository userRepository;
+	UserDao userRepository;
 	
 	@Override
 	public int saveIP(Map<String,String> map) {

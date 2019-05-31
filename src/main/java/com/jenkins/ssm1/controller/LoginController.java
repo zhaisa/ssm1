@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jenkins.ssm1.domain.User;
-import com.jenkins.ssm1.service.UserService;
+import com.jenkins.ssm1.service.IUserService;
 
 @RestController
 public class LoginController {
 	@Autowired
-    UserService userservice;
+    private IUserService userservice;
 	@RequestMapping(value = "/login", produces = "text/html;charset=UTF-8")
 	public ModelAndView toLogin() throws ClassNotFoundException {
 		ModelAndView mv = new ModelAndView();

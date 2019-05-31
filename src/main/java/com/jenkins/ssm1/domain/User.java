@@ -1,18 +1,29 @@
 package com.jenkins.ssm1.domain;
 
-import com.alibaba.fastjson.annotation.JSONField;
-
-
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.alibaba.fastjson.annotation.JSONField;
 
 /**
  * 用户信息的实体类
  * @author Nicky
  */
-@Entity
+
 @Table(name="user")
 public class User implements Serializable{
 
@@ -60,8 +71,7 @@ public class User implements Serializable{
 
 	private Set<Role> roles;
 
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Id
+	
 	public int getId() {
 		return id;
 	}
@@ -70,7 +80,7 @@ public class User implements Serializable{
 		this.id = id;
 	}
 
-	@Column(unique=true,length=100,nullable=false)
+	
 	public String getUsername() {
 		return username;
 	}
@@ -79,7 +89,7 @@ public class User implements Serializable{
 		this.username = username;
 	}
 
-	@Column(length=100,nullable=false)
+
 	public String getPassword() {
 		return password;
 	}
@@ -88,7 +98,7 @@ public class User implements Serializable{
 		this.password = password;
 	}
 
-	@Column(length = 11)
+	
 	public String getPhone() {
 		return phone;
 	}
@@ -97,7 +107,7 @@ public class User implements Serializable{
 		this.phone = phone;
 	}
 
-	@Column(length=6)
+
 	public String getSex() {
 		return sex;
 	}
@@ -106,7 +116,7 @@ public class User implements Serializable{
 		this.sex = sex;
 	}
 
-	@Column(length=100)
+	
 	public String getEmail() {
 		return email;
 	}
@@ -115,7 +125,6 @@ public class User implements Serializable{
 		this.email = email;
 	}
 
-	@Column(length=100)
 	public String getMark() {
 		return mark;
 	}
@@ -124,7 +133,7 @@ public class User implements Serializable{
 		this.mark = mark;
 	}
 
-	@Column(length=10)
+
 	public String getRank() {
 		return rank;
 	}
@@ -133,7 +142,7 @@ public class User implements Serializable{
 		this.rank = rank;
 	}
 
-	@Temporal(TemporalType.DATE)
+
     @JSONField(format ="yyyy-MM-dd HH:mm:ss")
 	public Date getLastLogin() {
 		return lastLogin;
@@ -143,7 +152,7 @@ public class User implements Serializable{
 		this.lastLogin = lastLogin;
 	}
 
-	@Column(length=100)
+
 	public String getLoginIp() {
 		return loginIp;
 	}
@@ -152,7 +161,7 @@ public class User implements Serializable{
 		this.loginIp = loginIp;
 	}
 
-	@Column(length=100)
+
 	public String getImageUrl() {
 		return imageUrl;
 	}
@@ -161,8 +170,7 @@ public class User implements Serializable{
 		this.imageUrl = imageUrl;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(nullable=false)
+
     @JSONField(format ="yyyy-MM-dd HH:mm:ss")
 	public Date getRegTime() {
 		return regTime;

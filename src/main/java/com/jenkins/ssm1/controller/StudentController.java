@@ -1,12 +1,13 @@
 package com.jenkins.ssm1.controller;
 
-import com.jenkins.ssm1.domain.Student;
-import com.jenkins.ssm1.service.IStudentService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import com.jenkins.ssm1.domain.Student;
+import com.jenkins.ssm1.service.IStudentService;
 
 @RestController
 public class StudentController {

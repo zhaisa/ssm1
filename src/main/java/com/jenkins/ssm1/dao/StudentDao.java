@@ -1,10 +1,15 @@
 package com.jenkins.ssm1.dao;
 
-import com.jenkins.ssm1.domain.Student;
-import org.apache.ibatis.annotations.*;
+import java.util.List;
+
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import com.jenkins.ssm1.domain.Student;
 @Mapper
 @Repository
 public interface StudentDao {

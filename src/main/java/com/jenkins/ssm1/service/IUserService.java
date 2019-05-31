@@ -10,7 +10,7 @@ import org.springframework.data.domain.Sort;
 
 import com.jenkins.ssm1.domain.User;
 
-public interface UserService {
+public interface IUserService {
 	int saveIP(Map<String,String> map);
 	Set<String> getRoles(String username);
 	Set<String> getPermissions(String username);
