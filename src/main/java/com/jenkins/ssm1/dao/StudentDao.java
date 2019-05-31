@@ -14,7 +14,7 @@ public interface StudentDao {
     void del(Long id);
     @Update("UPDATE student set name=#{name} WHERE id=#{id} ")
     void upd(Student stu);
-    @Select("SELECT * FROM stdent WHERE id =#{id}")
+    @Select("SELECT * FROM student WHERE id =#{id}")
     Student get(Long id);
      @Select("SELECT * FROM student")
     List<Student> list();
