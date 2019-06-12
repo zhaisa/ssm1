@@ -4,27 +4,10 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
+import javax.persistence.Entity;
 import com.alibaba.fastjson.annotation.JSONField;
 
-/**
- * 用户信息的实体类
- * @author Nicky
- */
-
-@Table(name="user")
+@Entity
 public class User implements Serializable{
 
 	/** 用户Id**/
@@ -69,8 +52,15 @@ public class User implements Serializable{
 	/** 权限**/
 	private String rights;
 
-	private Set<Role> roles;
+	public Set<Role> getRoles() {
+		return roles;
+	}
 
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
+	private Set<Role> roles;
 	
 	public int getId() {
 		return id;
@@ -196,16 +186,25 @@ public class User implements Serializable{
 		this.rights = rights;
 	}
 
-	//修改cascade策略为级联关系
-	@ManyToMany(targetEntity = Role.class, cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
-	@JoinTable(name = "sys_user_role", joinColumns = @JoinColumn(name = "userId", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "roleId") )
-	public Set<Role> getRoles() {
-		return roles;
+	public User() {
+		super();
 	}
 
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
+	public User(int id, String username, String password) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
 	}
+
+	public User(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
+	}
+	
+
+	
 
 
 

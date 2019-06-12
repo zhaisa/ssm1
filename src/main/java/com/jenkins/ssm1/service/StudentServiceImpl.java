@@ -11,7 +11,7 @@ import com.jenkins.ssm1.domain.Student;
 @Transactional
 @Service
 public class StudentServiceImpl implements IStudentService {
-    @Autowired
+    
     StudentDao dao;
 
     @Override
