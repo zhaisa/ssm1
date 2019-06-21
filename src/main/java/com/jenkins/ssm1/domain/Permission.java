@@ -22,7 +22,7 @@ import javax.persistence.Table;
  * @author Nicky
  * @date 2017年3月6日
  */
-@Table(name="sys_permission")
+@Table(name="syspermission")
 @Entity
 public class Permission implements Serializable {
 
