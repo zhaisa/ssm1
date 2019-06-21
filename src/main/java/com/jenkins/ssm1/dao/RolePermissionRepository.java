@@ -1,8 +1,11 @@
 package com.jenkins.ssm1.dao;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import com.jenkins.ssm1.domain.RolePermission;
 
@@ -10,7 +13,11 @@ import java.util.List;
 
 /**
  * Created by Nicky on 2017/11/18.
+ * 
  */
+@Mapper
+@Repository
+@Primary
 public interface RolePermissionRepository extends JpaRepository<RolePermission,String> {
 
     @Query(value = "select rp from RolePermission rp where rp.roleId=:id")

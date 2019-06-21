@@ -8,10 +8,10 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
+import com.jenkins.ssm1.annotation.LogController;
 import com.jenkins.ssm1.config.Constants;
 import com.jenkins.ssm1.config.ResultVO;
 import com.jenkins.ssm1.domain.Menu;
@@ -67,8 +68,8 @@ public class LoginController extends BaseController {
 	}
 
 	@RequestMapping(value = "/logincheck", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
-//@ResponseBody
-	// @LogController
+	@ResponseBody
+	@LogController
 	@ApiOperation(value = "登录验证接口", notes = "根据用户名、密码、验证码进行验证")
 	public ResultVO loginCheck(HttpServletRequest request) throws AuthenticationException {
 		String errInfo = "";// 错误信息
@@ -87,11 +88,11 @@ public class LoginController extends BaseController {
 				String password = logindata[1];
 				if (Tools.isNotEmpty(codeSession)/* &&code.equalsIgnoreCase(codeSession) */) {
 					// Shiro框架SHA加密
-					String passwordsha = new SimpleHash("SHA-1", username, password).toString();
-					log.info("SHA加密密码：{}", passwordsha);
+			//		String passwordsha = new SimpleHash("SHA-1", username, password).toString();
+			//		log.info("SHA加密密码：{}", passwordsha);
 					// System.out.println(passwordsha);
 					// 检测用户名和密码是否正确
-					User user = userservice.doLoginCheck(username, passwordsha);
+					User user = userservice.doLoginCheck(username, password);
 					if (user != null) {
 						if (Boolean.TRUE.equals(user.getLocked())) {
 							errInfo = "locked";
@@ -159,9 +160,9 @@ public class LoginController extends BaseController {
 
 		} else {
 			// 会话失效，返回登录界面
-			mv.setViewName("admin/frame/login");
+			mv.setViewName("login");
 		}
-		mv.setViewName("admin/frame/index");
+		mv.setViewName("index");
 		return mv;
 	}
 }
