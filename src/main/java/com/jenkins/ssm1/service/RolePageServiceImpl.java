@@ -17,9 +17,8 @@ import java.util.List;
  * Created by Nicky on 2017/7/30.
  */
 @Service
-public class RolePageService {
+public class RolePageServiceImpl implements IRolePageService {
 
-    @Autowired
     RolePageRepository roleRepository;
 
     /**
@@ -30,7 +29,7 @@ public class RolePageService {
      * @param string
      * @return
      */
-    private PageRequest buildPageRequest(int num, int size, Sort.Direction asc,
+     public PageRequest buildPageRequest(int num, int size, Sort.Direction asc,
                                          String string) {
         return new PageRequest(num-1, size,null,string);
     }

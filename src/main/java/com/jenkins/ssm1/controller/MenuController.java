@@ -4,8 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.jenkins.ssm1.config.Constants;
 import com.jenkins.ssm1.domain.Menu;
 import com.jenkins.ssm1.domain.Permission;
-import com.jenkins.ssm1.service.MenuService;
-import com.jenkins.ssm1.service.PermissionService;
+import com.jenkins.ssm1.service.MenuServiceImpl;
+import com.jenkins.ssm1.service.PermissionServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -30,9 +30,9 @@ import java.util.Map;
 public class MenuController extends BaseController {
 
     @Autowired
-   MenuService menuService;
+   MenuServiceImpl menuService;
     @Autowired
-    PermissionService permissionService;
+    PermissionServiceImpl permissionService;
 
     @RequestMapping(value = "/getMenus", produces = "application/json;charset=UTF-8")
 //    @LogController

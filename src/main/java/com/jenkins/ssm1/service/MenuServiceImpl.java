@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,9 +13,10 @@ import com.jenkins.ssm1.dao.MenuRepository;
 import com.jenkins.ssm1.domain.Menu;
 
 @Service
-public class MenuService {
+@Transactional
+public class MenuServiceImpl implements IMenuService {
 
-	@Autowired
+//	@Autowired
 	MenuRepository menuRepository;
 
 	/**
@@ -26,10 +28,12 @@ public class MenuService {
 	 * @param string
 	 * @return
 	 */
-	private PageRequest buildPageRequest(int num, int size, Sort.Direction asc, String string) {
+
+	@Override
+	public PageRequest buildPageRequest(int num, int size, Direction asc, String string) {
+		// TODO Auto-generated method stub
 		return new PageRequest(num - 1, size, null, string);
 	}
-
 	/**
 	 * 获取所有的菜单信息并分页显示
 	 * 
@@ -39,7 +43,7 @@ public class MenuService {
 	 *            每一页面的页数
 	 * @return
 	 */
-	@Transactional
+	
 	// @RedisCache(nameSpace = RedisCacheNamespace.SYS_MENU)
 	public Page<Menu> findAll(int pageNo, int pageSize, Sort.Direction dir, String str) {
 		PageRequest request = buildPageRequest(pageNo, pageSize, dir, str);
@@ -52,7 +56,7 @@ public class MenuService {
 	 * 
 	 * @return
 	 */
-	@Transactional
+
 	// @RedisCache
 	public List<Menu> findAllParentMenu() {
 		return menuRepository.findAllParentMenu();
@@ -64,7 +68,7 @@ public class MenuService {
 	 * @param id
 	 * @return
 	 */
-	@Transactional
+	
 	// @RedisCache
 	public List<Menu> findSubMenuById(int id) {
 		return menuRepository.findSubMenuByParentId(id);
@@ -76,7 +80,7 @@ public class MenuService {
 	 * @param id
 	 * @return
 	 */
-	@Transactional
+
 	// @RedisCache
 	// public Menu findMenuById(@RedisCacheKey int id){
 	// return menuRepository.findMenuByMenuId(id);
@@ -104,5 +108,7 @@ public class MenuService {
 
 		return menuRepository.findMenuByMenuId(menuId);
 	}
+
+
 
 }

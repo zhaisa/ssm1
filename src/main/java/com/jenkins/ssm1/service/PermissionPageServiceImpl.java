@@ -1,6 +1,5 @@
 package com.jenkins.ssm1.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -13,8 +12,8 @@ import com.jenkins.ssm1.domain.Permission;
  * Created by Nicky on 2017/12/3.
  */
 @Service
-public class PermissionPageService {
-    @Autowired
+public class PermissionPageServiceImpl {
+ 
     PermissionPageRepository permissionPageRepository;
 
     /**

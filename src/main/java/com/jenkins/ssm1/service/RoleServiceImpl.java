@@ -1,6 +1,9 @@
 package com.jenkins.ssm1.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.jenkins.ssm1.dao.RoleRepository;
@@ -12,9 +15,9 @@ import java.util.List;
  * Created by Nicky on 2017/12/2.
  */
 @Service
-public class RoleService {
+public class RoleServiceImpl implements IRoleService{
 
-    @Autowired
+ //   @Autowired
     RoleRepository roleRepository;
 
     /**
@@ -26,4 +29,6 @@ public class RoleService {
     public List<Role> findAll(List<Integer> ids){
         return roleRepository.findAll(ids);
     }
+
+	
 }

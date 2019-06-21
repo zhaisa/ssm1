@@ -13,9 +13,9 @@ import com.jenkins.ssm1.domain.Menu;
  * Created by Nicky on 2017/6/17.
  */
 @Service
-public class MenuTreeService {
+public class MenuTreeServiceImpl {
 
-    @Autowired
+ //   @Autowired
     MenuTreeRepository menuTreeRepository;
 
     /**

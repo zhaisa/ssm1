@@ -1,20 +1,19 @@
 package com.jenkins.ssm1.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.jenkins.ssm1.dao.RolePermissionRepository;
 import com.jenkins.ssm1.domain.RolePermission;
 
-import java.util.List;
-
 /**
  * Created by Nicky on 2017/11/18.
  */
 @Service
-public class RolePermissionService {
+public class RolePermissionServiceImpl implements IRolePermissionService{
 
-    @Autowired
+ //   @Autowired
     RolePermissionRepository rolePermissionRepository;
 
     /**

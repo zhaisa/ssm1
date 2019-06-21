@@ -67,7 +67,7 @@ public class LoginController extends BaseController {
 	}
 
 	@RequestMapping(value = "/logincheck", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
-	@ResponseBody
+//@ResponseBody
 	// @LogController
 	@ApiOperation(value = "登录验证接口", notes = "根据用户名、密码、验证码进行验证")
 	public ResultVO loginCheck(HttpServletRequest request) throws AuthenticationException {
