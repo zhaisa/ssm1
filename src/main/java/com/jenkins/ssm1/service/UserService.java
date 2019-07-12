@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -12,18 +13,17 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jenkins.ssm1.dao.UserDao;
+import com.jenkins.ssm1.dao.UserRepository;
 import com.jenkins.ssm1.domain.Operation;
 import com.jenkins.ssm1.domain.Permission;
 import com.jenkins.ssm1.domain.Role;
 import com.jenkins.ssm1.domain.User;
-@Transactional
-@Service
-public class UserServiceImpl implements IUserService {
-	
-	UserDao userRepository;
 
-	@Override
+@Service
+public class UserService  {
+	@Autowired
+	UserRepository userRepository;
+
 	public int saveIP(Map<String, String> map) {
 		String loginIp = map.get("loginIp");
 		String username = map.get("username");
@@ -31,21 +31,21 @@ public class UserServiceImpl implements IUserService {
 		return code;
 	}
 
-	@Override
+	@Transactional(readOnly=true)
 	// @RedisCache(nameSpace = RedisCacheNamespace.SYS_USER)
 	public User findByUsername(String username) {
 		return userRepository.findByUsername(username);
 	}
 
-	@Override
 	// @RedisCache(nameSpace = RedisCacheNamespace.SYS_USER)
 	// @RedisCache
+	@Transactional(readOnly=true)
 	public User doLoginCheck(String username, String password) {
 		return userRepository.findByUsernameAndPassword(username, password);
 	}
 
-	@Override
 	// @RedisCache(nameSpace = RedisCacheNamespace.SYS_USER)
+	@Transactional(readOnly=true)
 	public User findByUId(int id) {
 		return userRepository.findById(id);
 	}
@@ -59,7 +59,6 @@ public class UserServiceImpl implements IUserService {
 	 * @param string
 	 * @return
 	 */
-	@Override
 	public PageRequest buildPageRequest(int num, int size, Direction asc, String string) {
 		// TODO Auto-generated method stub
 		return new PageRequest(num - 1, size, null, string);
@@ -74,7 +73,7 @@ public class UserServiceImpl implements IUserService {
 	 *            每一页面的页数
 	 * @return
 	 */
-	@Override
+	@Transactional
 	public Page<User> findAll(int pageNo, int pageSize, Sort.Direction dir, String str) {
 		PageRequest request = buildPageRequest(pageNo, pageSize, dir, str);
 		Page<User> users = userRepository.findAll(request);
@@ -96,7 +95,6 @@ public class UserServiceImpl implements IUserService {
 	 * @param endDate
 	 * @return
 	 */
-	@Override
 	public Page<User> searchU(int pageNo, int pageSize, Sort.Direction dir, String str, String keyword, Date startDate,
 			Date endDate) {
 		PageRequest request = buildPageRequest(pageNo, pageSize, dir, str);
@@ -109,7 +107,6 @@ public class UserServiceImpl implements IUserService {
 	 * 
 	 * @param user
 	 */
-	@Override
 	public void saveU(User user) {
 		userRepository.save(user);
 	}
@@ -119,18 +116,24 @@ public class UserServiceImpl implements IUserService {
 	 * 
 	 * @param user
 	 */
-	@Override
 	public int updateU(User user) {
 		return userRepository.updatePasswordById(user.getPassword(), user.getUsername());
 	}
 
-	@Override
 	public Set<String> getRoles(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		User user = userRepository.findByUsername(username);
+		Set<Role> roles = user.getRoles();
+		//创建一个HashSet来存放角色权限信息
+		Set<String> permissionStrs = new HashSet<String>();
+		for(Role r:roles){
+			for(Permission p:r.getPermissions())
+				for(Operation ope:p.getOperations()){
+					permissionStrs.add(ope.getOperation());
+				}
+		}
+		return permissionStrs;
 	}
 
-	@Override
 	public Set<String> getPermissions(String username) {
 		User user = userRepository.findByUsername(username);
 		Set<Role> roles = user.getRoles();
@@ -145,25 +148,21 @@ public class UserServiceImpl implements IUserService {
 		return permissionStrs;
 	}
 
-	@Override
 	public User findByUsernameAndPassword(String username, String password) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return userRepository.findByUsernameAndPassword(username,password);
 	}
 
-	@Override
 	public User findById(int id) {
 		// TODO Auto-generated method stub
 		return userRepository.findById(id);
 	}
 
-	@Override
 	public int updateLoginIpById(String loginIp, String username) {
 		// TODO Auto-generated method stub
 		return userRepository.updateLoginIpById(loginIp, username);
 	}
 
-	@Override
 	public int updatePasswordById(String password, String username) {
 		// TODO Auto-generated method stub
 		return userRepository.updatePasswordById(password, username);

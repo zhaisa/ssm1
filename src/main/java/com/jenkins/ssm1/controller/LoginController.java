@@ -8,10 +8,12 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +31,7 @@ import com.jenkins.ssm1.domain.Menu;
 import com.jenkins.ssm1.domain.Permission;
 import com.jenkins.ssm1.domain.Role;
 import com.jenkins.ssm1.domain.User;
-import com.jenkins.ssm1.service.IUserService;
+import com.jenkins.ssm1.service.UserService;
 import com.jenkins.ssm1.util.ListSortUtils;
 import com.jenkins.ssm1.util.MenuTreeUtils;
 import com.jenkins.ssm1.util.Tools;
@@ -39,7 +41,7 @@ import io.swagger.annotations.ApiOperation;
 @Controller
 public class LoginController extends BaseController {
 	@Autowired
-	private IUserService userservice;
+	private UserService userservice;
 
 	private void getRemortIP(String username) {
 		HttpServletRequest request = this.getRequest();
@@ -67,9 +69,9 @@ public class LoginController extends BaseController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/logincheck", method = RequestMethod.POST, produces = "text/html;charset=UTF-8")
+	@RequestMapping(value = "/logincheck", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
-	@LogController
+//	@LogController
 	@ApiOperation(value = "登录验证接口", notes = "根据用户名、密码、验证码进行验证")
 	public ResultVO loginCheck(HttpServletRequest request) throws AuthenticationException {
 		String errInfo = "";// 错误信息
@@ -88,9 +90,9 @@ public class LoginController extends BaseController {
 				String password = logindata[1];
 				if (Tools.isNotEmpty(codeSession)/* &&code.equalsIgnoreCase(codeSession) */) {
 					// Shiro框架SHA加密
-			//		String passwordsha = new SimpleHash("SHA-1", username, password).toString();
-			//		log.info("SHA加密密码：{}", passwordsha);
-					// System.out.println(passwordsha);
+					String passwordsha = new SimpleHash("SHA-1", username, password).toString();
+					log.info("SHA加密密码：{}", passwordsha);
+					 System.out.println(passwordsha);
 					// 检测用户名和密码是否正确
 					User user = userservice.doLoginCheck(username, password);
 					if (user != null) {

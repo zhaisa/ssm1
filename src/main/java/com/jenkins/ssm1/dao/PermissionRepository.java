@@ -11,9 +11,7 @@ import com.jenkins.ssm1.domain.Permission;
 /**
  * Created by Nicky on 2017/11/11.
  */
-@Mapper
-@Repository
-@Primary
+
 public interface PermissionRepository extends JpaRepository<Permission,Integer> {
 
 }

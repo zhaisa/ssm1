@@ -24,16 +24,14 @@
 		<mybatis-spring-boot.version>1.1.1</mybatis-spring-boot.version>
 		<mysql-connector.version>5.1.39</mysql-connector.version>
 		<spring-boot.version>2.1.4.RELEASE</spring-boot.version>
-		<druid.version>1.1.10</druid.version>
+		<druid.version>1.1.14</druid.version>
 		<github.pagehelper.version>4.2.1</github.pagehelper.version>
 		<fastjson.version>1.2.7</fastjson.version>
 		<lombok.version>1.16.10</lombok.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-<!-- 		<thymeleaf.version>3.0.9.RELEASE</thymeleaf.version>
-
-		<thymeleaf-layout-dialect.version>2.1.1</thymeleaf-layout-dialect.version> -->
+		<!-- <thymeleaf.version>3.0.9.RELEASE</thymeleaf.version> <thymeleaf-layout-dialect.version>2.1.1</thymeleaf-layout-dialect.version> -->
 	</properties>
 
 	<dependencies>
@@ -130,32 +128,52 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
-<!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-spring -->
-<dependency>
-    <groupId>org.apache.shiro</groupId>
-    <artifactId>shiro-spring</artifactId>
-    <version>1.4.0</version>
-</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-spring -->
+		<dependency>
+			<groupId>org.apache.shiro</groupId>
+			<artifactId>shiro-spring</artifactId>
+			<version>1.4.0</version>
+		</dependency>
 
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.8.1</version>
+		</dependency>
+		<!-- druid -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>${druid.version}</version>
+		</dependency><!--$NO-MVN-MAN-VER$-->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid-spring-boot-starter</artifactId>
+			<version>${druid.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+			<version>${spring-boot.version}</version>
+		</dependency>
+		<!--redis客户端-->
 <dependency>
-    <groupId>io.springfox</groupId>
-    <artifactId>springfox-swagger2</artifactId>
-    <version>2.2.2</version>
+    <groupId>redis.clients</groupId>
+    <artifactId>jedis</artifactId>
+    <version>2.9.0</version>
 </dependency>
-<dependency>
-    <groupId>io.springfox</groupId>
-    <artifactId>springfox-swagger-ui</artifactId>
-    <version>2.2.2</version>
-</dependency>
-<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
-<dependency>
-    <groupId>org.apache.commons</groupId>
-    <artifactId>commons-lang3</artifactId>
-    <version>3.8.1</version>
-</dependency>
-
-
-	</dependencies>
+	</dependencies><!--$NO-MVN-MAN-VER$-->
 
 	<build>
 		<plugins>

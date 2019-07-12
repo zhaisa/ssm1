@@ -14,7 +14,7 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
 import com.jenkins.ssm1.domain.User;
-import com.jenkins.ssm1.service.IUserService;
+import com.jenkins.ssm1.service.UserService;
 
 /**
  * @description 基于Shiro框架的权限安全认证和授权
@@ -25,7 +25,7 @@ public class ShiroRealm extends AuthorizingRealm {
 
 	/**注解引入业务类**/
 	@Resource
-	IUserService userService;
+	UserService userService;
 	
 	/**
 	 * 登录信息和用户验证信息验证(non-Javadoc)

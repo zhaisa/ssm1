@@ -15,9 +15,7 @@ import java.util.List;
  * Created by Nicky on 2017/11/18.
  * 
  */
-@Mapper
-@Repository
-@Primary
+
 public interface RolePermissionRepository extends JpaRepository<RolePermission,String> {
 
     @Query(value = "select rp from RolePermission rp where rp.roleId=:id")

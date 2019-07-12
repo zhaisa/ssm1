@@ -23,8 +23,8 @@ import com.alibaba.fastjson.JSON;
 import com.jenkins.ssm1.annotation.LogController;
 import com.jenkins.ssm1.config.Constants;
 import com.jenkins.ssm1.domain.Permission;
-import com.jenkins.ssm1.service.PermissionPageServiceImpl;
-import com.jenkins.ssm1.service.PermissionServiceImpl;
+import com.jenkins.ssm1.service.PermissionPageService;
+import com.jenkins.ssm1.service.PermissionService;
 
 /**
  * Created by Nicky on 2017/12/3.
@@ -34,9 +34,9 @@ import com.jenkins.ssm1.service.PermissionServiceImpl;
 public class PermissionController extends BaseController {
 
     @Autowired
-    PermissionPageServiceImpl permissionPageService;
+    PermissionPageService permissionPageService;
     @Autowired
-    PermissionServiceImpl permissionService;
+    PermissionService permissionService;
 
     /**
      * 查询所有权限信息

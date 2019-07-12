@@ -6,11 +6,11 @@ import com.jenkins.ssm1.domain.Menu;
 import com.jenkins.ssm1.domain.Permission;
 import com.jenkins.ssm1.domain.Role;
 import com.jenkins.ssm1.domain.RolePermission;
-import com.jenkins.ssm1.service.MenuServiceImpl;
-import com.jenkins.ssm1.service.MenuTreeServiceImpl;
-import com.jenkins.ssm1.service.PermissionServiceImpl;
-import com.jenkins.ssm1.service.RolePageServiceImpl;
-import com.jenkins.ssm1.service.RolePermissionServiceImpl;
+import com.jenkins.ssm1.service.MenuService;
+import com.jenkins.ssm1.service.MenuTreeService;
+import com.jenkins.ssm1.service.PermissionService;
+import com.jenkins.ssm1.service.RolePageService;
+import com.jenkins.ssm1.service.RolePermissionService;
 import com.jenkins.ssm1.util.UUIDGenerator;
 
 import org.apache.commons.lang3.StringUtils;
@@ -34,15 +34,15 @@ import java.util.*;
 public class RoleController extends BaseController {
 
     @Autowired
-    RolePageServiceImpl roleService;
+    RolePageService roleService;
     @Autowired
-    MenuServiceImpl menuService;
+    MenuService menuService;
     @Autowired
-    MenuTreeServiceImpl menuTreeService;
+    MenuTreeService menuTreeService;
     @Autowired
-    PermissionServiceImpl permissionService;
+    PermissionService permissionService;
     @Autowired
-    RolePermissionServiceImpl rolePermissionService;
+    RolePermissionService rolePermissionService;
 
     /**
      * 查询所有角色信息

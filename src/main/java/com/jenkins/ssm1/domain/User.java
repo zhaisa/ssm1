@@ -1,13 +1,18 @@
 package com.jenkins.ssm1.domain;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
-import javax.persistence.Entity;
-import com.alibaba.fastjson.annotation.JSONField;
-
+/**
+ * 用户信息的实体类
+ * @author Nicky
+ */
 @Entity
+@Table(name="sys_user")
 public class User implements Serializable{
 
 	/** 用户Id**/
@@ -52,16 +57,10 @@ public class User implements Serializable{
 	/** 权限**/
 	private String rights;
 
-	public Set<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
-	}
-
 	private Set<Role> roles;
-	
+
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Id
 	public int getId() {
 		return id;
 	}
@@ -70,7 +69,7 @@ public class User implements Serializable{
 		this.id = id;
 	}
 
-	
+	@Column(unique=true,length=100,nullable=false)
 	public String getUsername() {
 		return username;
 	}
@@ -79,7 +78,7 @@ public class User implements Serializable{
 		this.username = username;
 	}
 
-
+	@Column(length=100,nullable=false)
 	public String getPassword() {
 		return password;
 	}
@@ -88,7 +87,7 @@ public class User implements Serializable{
 		this.password = password;
 	}
 
-	
+	@Column(length = 11)
 	public String getPhone() {
 		return phone;
 	}
@@ -97,7 +96,7 @@ public class User implements Serializable{
 		this.phone = phone;
 	}
 
-
+	@Column(length=6)
 	public String getSex() {
 		return sex;
 	}
@@ -106,7 +105,7 @@ public class User implements Serializable{
 		this.sex = sex;
 	}
 
-	
+	@Column(length=100)
 	public String getEmail() {
 		return email;
 	}
@@ -115,6 +114,7 @@ public class User implements Serializable{
 		this.email = email;
 	}
 
+	@Column(length=100)
 	public String getMark() {
 		return mark;
 	}
@@ -123,7 +123,7 @@ public class User implements Serializable{
 		this.mark = mark;
 	}
 
-
+	@Column(length=10)
 	public String getRank() {
 		return rank;
 	}
@@ -132,7 +132,7 @@ public class User implements Serializable{
 		this.rank = rank;
 	}
 
-
+	@Temporal(TemporalType.DATE)
     @JSONField(format ="yyyy-MM-dd HH:mm:ss")
 	public Date getLastLogin() {
 		return lastLogin;
@@ -142,7 +142,7 @@ public class User implements Serializable{
 		this.lastLogin = lastLogin;
 	}
 
-
+	@Column(length=100)
 	public String getLoginIp() {
 		return loginIp;
 	}
@@ -151,7 +151,7 @@ public class User implements Serializable{
 		this.loginIp = loginIp;
 	}
 
-
+	@Column(length=100)
 	public String getImageUrl() {
 		return imageUrl;
 	}
@@ -160,7 +160,8 @@ public class User implements Serializable{
 		this.imageUrl = imageUrl;
 	}
 
-
+	@Temporal(TemporalType.DATE)
+	@Column(nullable=false)
     @JSONField(format ="yyyy-MM-dd HH:mm:ss")
 	public Date getRegTime() {
 		return regTime;
@@ -186,25 +187,16 @@ public class User implements Serializable{
 		this.rights = rights;
 	}
 
-	public User() {
-		super();
+	//修改cascade策略为级联关系
+	@ManyToMany(targetEntity = Role.class, cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
+	@JoinTable(name = "sys_user_role", joinColumns = @JoinColumn(name = "userId", referencedColumnName = "id") , inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "roleId") )
+	public Set<Role> getRoles() {
+		return roles;
 	}
 
-	public User(int id, String username, String password) {
-		super();
-		this.id = id;
-		this.username = username;
-		this.password = password;
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
 	}
-
-	public User(String username, String password) {
-		super();
-		this.username = username;
-		this.password = password;
-	}
-	
-
-	
 
 
 

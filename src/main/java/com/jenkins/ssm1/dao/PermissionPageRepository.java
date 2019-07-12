@@ -11,9 +11,7 @@ import com.jenkins.ssm1.domain.Permission;
 /**
  * Created by Nicky on 2017/12/3.
  */
-@Mapper
-@Repository
-@Primary
+
 public interface PermissionPageRepository extends PagingAndSortingRepository<Permission,Integer> {
 
 }

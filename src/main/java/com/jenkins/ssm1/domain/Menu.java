@@ -1,11 +1,15 @@
 package com.jenkins.ssm1.domain;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.Entity;
-
-
+/**
+ * @description 菜单信息实体
+ * @author Nicky
+ * @date 2017年3月17日
+ */
+@Table(name="sys_menu")
 @Entity
 public class Menu implements Serializable {
 
@@ -43,7 +47,8 @@ public class Menu implements Serializable {
 		super();
 	}   
 	
-	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getMenuId() {
 		return this.menuId;
 	}
@@ -52,6 +57,7 @@ public class Menu implements Serializable {
 		this.menuId = menuId;
 	}
 
+	@Column(length=100)
 	public int getParentId() {
 		return parentId;
 	}
@@ -60,6 +66,7 @@ public class Menu implements Serializable {
 		this.parentId = parentId;
 	}
 
+	@Column(length=100)
 	public String getMenuName() {
 		return this.menuName;
 	}
@@ -67,7 +74,8 @@ public class Menu implements Serializable {
 	public void setMenuName(String menuName) {
 		this.menuName = menuName;
 	}   
-
+	
+	@Column(length=30)
 	public String getMenuIcon() {
 		return this.menuIcon;
 	}
@@ -76,6 +84,7 @@ public class Menu implements Serializable {
 		this.menuIcon = menuIcon;
 	}   
 	
+	@Column(length=100)
 	public String getMenuUrl() {
 		return this.menuUrl;
 	}
@@ -84,7 +93,7 @@ public class Menu implements Serializable {
 		this.menuUrl = menuUrl;
 	}   
 	
-	
+	@Column(length=100)
 	public String getMenuType() {
 		return this.menuType;
 	}
@@ -93,7 +102,7 @@ public class Menu implements Serializable {
 		this.menuType = menuType;
 	}
 
-
+	@Column(length=10)
 	public String getMenuOrder() {
 		return menuOrder;
 	}
@@ -102,7 +111,7 @@ public class Menu implements Serializable {
 		this.menuOrder = menuOrder;
 	}
 
-	
+	@Column(length=10)
 	public String getMenuStatus(){
 		return menuStatus;
 	}
@@ -111,7 +120,7 @@ public class Menu implements Serializable {
 		this.menuStatus = menuStatus;
 	}
 
-
+	@Transient
 	public List<Menu> getSubMenu() {
 		return subMenu;
 	}
@@ -124,7 +133,7 @@ public class Menu implements Serializable {
 		this.target = target;
 	}
 
-
+	@Transient
 	public String getTarget(){
 		return target;
 	}
@@ -133,7 +142,7 @@ public class Menu implements Serializable {
 		this.hasSubMenu = hasSubMenu;
 	}
 
-
+	@Transient
 	public boolean getHasSubMenu(){
 		return hasSubMenu;
 	}

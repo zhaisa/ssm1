@@ -21,7 +21,7 @@ import javax.persistence.Table;
  * @author Nicky
  * @date 2017年3月16日
  */
-@Table(name="sysrole")
+@Table(name="sys_role")
 @Entity
 public class Role implements Serializable{
 

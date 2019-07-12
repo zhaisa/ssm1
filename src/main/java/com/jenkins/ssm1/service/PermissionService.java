@@ -3,7 +3,6 @@ package com.jenkins.ssm1.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.jenkins.ssm1.dao.PermissionRepository;
 import com.jenkins.ssm1.domain.Permission;
@@ -16,10 +15,9 @@ import java.util.Set;
  * Created by Nicky on 2017/11/11.
  */
 @Service
-@Transactional
-public class PermissionServiceImpl implements IPermissionService {
+public class PermissionService {
 
- //   @Autowired
+    @Autowired
     PermissionRepository permissionRepository;
 
     /**
